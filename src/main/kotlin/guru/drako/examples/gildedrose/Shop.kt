@@ -42,18 +42,19 @@ class Shop(val items: List<Item>) {
       item.name.contains("Backstage passes") -> backstagePassesItemUpdater(item)
       item.name.contains("Conjured") -> conjuredItemUpdater(item)
       // for basic items
-      !item.name.contains("Sulfuras") -> normalItemUpdater(item)
+      else -> normalItemUpdater(item)
     }
 
   }
   fun updateQuality() {
     items.forEach {
-      if (!it.name.contains("Sulfuras")){
+      // never modify Sulfuras
+      if (!it.name.contains("Sulfuras")) {
         --it.sellIn
+        updateItem(it)
+        // ensure item's quality is in the range
+        it.quality = it.quality.coerceIn(0, 50)
       }
-      updateItem(it)
-      // ensure item's quality is in the range
-      it.quality = it.quality.coerceIn(0, 50)
     }
   }
 }
