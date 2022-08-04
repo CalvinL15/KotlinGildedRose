@@ -22,9 +22,9 @@ class Shop(val items: List<Item>) {
 
   private fun conjuredItemUpdater(item: Item) {
     // "Conjured" items degrade in quality twice as fast as normal items
-    item.quality -= item.quality - 2
+    item.quality = item.quality - 2
     if (item.sellIn < 0) {
-      item.quality -= item.quality - 2
+      item.quality = item.quality - 2
     }
   }
 
@@ -53,7 +53,7 @@ class Shop(val items: List<Item>) {
       }
       updateItem(it)
       // ensure item's quality is in the range
-      it.quality.coerceIn(0, 50)
+      it.quality = it.quality.coerceIn(0, 50)
     }
   }
 }
