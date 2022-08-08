@@ -30,7 +30,7 @@ class Shop(val items: List<Item>) {
 
   private fun normalItemUpdater(item: Item) {
     --item.quality
-    // quality degrade as fast as sellIn date has passed
+    // quality degrade twice as fast if sellIn date has passed
     if (item.sellIn < 0) {
       --item.quality
     }
